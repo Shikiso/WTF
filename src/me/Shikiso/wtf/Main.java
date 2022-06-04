@@ -57,6 +57,7 @@ public class Main extends JavaPlugin {
 		//Boss
 		getServer().getPluginManager().registerEvents(new ModifyEnderDragon(), this);
 		getServer().getPluginManager().registerEvents(new ModifyWither(), this);
+		ModifyEnderDragon.init();
 		
 		//Hostile
 		getServer().getPluginManager().registerEvents(new ModifySilverfish(), this);

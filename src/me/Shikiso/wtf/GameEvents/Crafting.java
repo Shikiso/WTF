@@ -25,7 +25,7 @@ public class Crafting implements Listener {
 			Material.NETHERITE_AXE, Material.NETHERITE_HOE, Material.NETHERITE_PICKAXE, Material.NETHERITE_SHOVEL, Material.NETHERITE_SWORD);
 	
 	@EventHandler
-	public void Craft(CraftItemEvent event) {		
+	public void Craft(CraftItemEvent event) {
 		Material tool = Tools.get(rand.nextInt(Tools.size()));
 
 		if (event.getRecipe().getResult().getType().equals(tool)) {
