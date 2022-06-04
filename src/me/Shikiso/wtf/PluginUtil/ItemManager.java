@@ -16,7 +16,8 @@ public class ItemManager {
 	public static ItemStack YeetStick;
 	public static ItemStack PickaxeDrill;
 	public static ItemStack LaunchPad;
-	public static ShapedRecipe StonePickaxeRecipe;
+	public static ItemStack FlyingFeather;
+	public static ItemStack AntiLightningHelmet;
 	
 	public static void init() {
 		createOPSword();
@@ -24,6 +25,8 @@ public class ItemManager {
 		createYeetStick();
 		createPickaxeDrill();
 		createLaunchPad();
+		createFlyingFeather();
+		createAntiLightningHelmet();
 	}
 	
 	public static void createOPSword() {
@@ -87,13 +90,23 @@ public class ItemManager {
 		LaunchPad = item;
 	}
 	
-	public static void StonePickaxeCustomRecipe() {
-		ItemStack StonePickaxe = new ItemStack(Material.STONE_PICKAXE);
-		StonePickaxeRecipe = new ShapedRecipe(StonePickaxe);
-		StonePickaxeRecipe.shape("SSS", " T ", " T ");
-		StonePickaxeRecipe.setIngredient('S', Material.STONE);
-		StonePickaxeRecipe.setIngredient('T', Material.STICK);
-		Bukkit.getServer().addRecipe(StonePickaxeRecipe);
+	public static void createFlyingFeather() {
+		ItemStack item = new ItemStack(Material.FEATHER, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName("Flying Feather");
+		List<String> lore = new ArrayList<>();
+		lore.add("Right click to be able to fly");
+		meta.setLore(lore);
+		item.setItemMeta(meta);
+		FlyingFeather = item;
+	}
+	
+	public static void createAntiLightningHelmet() {
+		ItemStack item = new ItemStack(Material.IRON_HELMET, 1);
+		ItemMeta meta = item.getItemMeta();
+		meta.setDisplayName("§6Anti Lightning Helmet");
+		item.setItemMeta(meta);
+		AntiLightningHelmet = item;
 	}
 }
 

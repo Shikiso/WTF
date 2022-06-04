@@ -32,12 +32,15 @@ public class Launch {
 	}
 	
 	public static void launchAllMobs() {
+		System.out.println(1);
 		Random rand = new Random();
 		
 		for (World world : Bukkit.getWorlds()) {
+			System.out.println(2);
 			for (int i = 0; i > 20; i++) {
 				Entity entity = world.getEntities().get(rand.nextInt(world.getEntities().size()));
 				Location loc = entity.getLocation();
+				System.out.println(3);
 				for (int x=0; x<5; x++) {
 					 world.createExplosion(loc, 1);
 				}

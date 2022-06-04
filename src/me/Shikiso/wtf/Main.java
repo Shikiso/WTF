@@ -2,12 +2,13 @@ package me.Shikiso.wtf;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.Shikiso.wtf.Blocks.Crafting;
 import me.Shikiso.wtf.Blocks.LaunchBlocks;
 import me.Shikiso.wtf.Blocks.ModifyOres;
 import me.Shikiso.wtf.Blocks.ModifyTrees;
 import me.Shikiso.wtf.Blocks.RandomDrops;
 import me.Shikiso.wtf.Blocks.TntSpawn;
+import me.Shikiso.wtf.GameEvents.Crafting;
+import me.Shikiso.wtf.GameEvents.TNT;
 import me.Shikiso.wtf.Mobs.Boss.ModifyEnderDragon;
 import me.Shikiso.wtf.Mobs.Boss.ModifyWither;
 import me.Shikiso.wtf.Mobs.Hostile.ModifWitherSkeleton;
@@ -32,20 +33,24 @@ import me.Shikiso.wtf.Mobs.Passive.ModifySheep;
 import me.Shikiso.wtf.Mobs.Utility.ModifyIronGolem;
 import me.Shikiso.wtf.Mobs.Utility.ModifySnowGolems;
 import me.Shikiso.wtf.Player.DamageEvent;
+import me.Shikiso.wtf.Player.RightClick;
 import me.Shikiso.wtf.PluginUtil.ItemManager;
 
 public class Main extends JavaPlugin {
 	
 	@Override
-	public void onEnable() {
+	public void onEnable() {		
 		//Items
 		ItemManager.init();
+		
+		//Events
+		getServer().getPluginManager().registerEvents(new Crafting(), this);
+		getServer().getPluginManager().registerEvents(new TNT(), this);
 				
 		//Blocks
 		getServer().getPluginManager().registerEvents(new LaunchBlocks(), this);
 		getServer().getPluginManager().registerEvents(new ModifyOres(), this);
 		getServer().getPluginManager().registerEvents(new ModifyTrees(), this);
-		getServer().getPluginManager().registerEvents(new Crafting(), this);
 		getServer().getPluginManager().registerEvents(new RandomDrops(), this);
 		getServer().getPluginManager().registerEvents(new TntSpawn(), this);
 		
@@ -84,6 +89,7 @@ public class Main extends JavaPlugin {
 		
 		//Players
 		getServer().getPluginManager().registerEvents(new DamageEvent(), this);
+		getServer().getPluginManager().registerEvents(new RightClick(), this);
 		
 		System.out.println("[WTF] Loaded WTF");
 	}

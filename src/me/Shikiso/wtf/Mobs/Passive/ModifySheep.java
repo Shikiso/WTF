@@ -16,7 +16,11 @@ public class ModifySheep implements Listener {
 			double damage = e.getDamage();
 			Player player = Bukkit.getPlayer(e.getDamager().getUniqueId());
 			if (player.getHealth() <= 20 && player.getHealth() > 0) {
-				player.setHealth(player.getHealth()-damage);
+				if (player.getHealth()-damage <= 0) {
+					player.setHealth(0);
+				}else {
+					player.setHealth(player.getHealth()-damage);
+				}
 				player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_DEATH, 1, 0);
 			}
 		}

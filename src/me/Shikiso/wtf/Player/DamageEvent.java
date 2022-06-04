@@ -3,6 +3,7 @@ package me.Shikiso.wtf.Player;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,6 +21,12 @@ public class DamageEvent implements Listener {
 			if (e.getDamager() instanceof Creeper) {
 				e.setCancelled(true);
 			}
+			else if (e.getDamager() instanceof LightningStrike) {
+				Player player = Bukkit.getPlayer(e.getEntity().getUniqueId());
+				if (player.getInventory().getHelmet().getItemMeta().getDisplayName().equals(ItemManager.AntiLightningHelmet.getItemMeta().getDisplayName())) {
+					e.setCancelled(true);
+				}
+			}
 		}
 		
 		if (e.getDamager() instanceof Player) {
@@ -27,13 +34,15 @@ public class DamageEvent implements Listener {
 			Player player = Bukkit.getPlayer(damager.getUniqueId());
 			ItemStack itemInHand = player.getItemInHand();
 			
-			if (itemInHand.equals(ItemManager.LaunchPad)) {
+			if (itemInHand.getItemMeta().equals(ItemManager.LaunchPad.getItemMeta())) {
 				if (e.getEntity() instanceof Player) {
-					Launch.launchPlayer(player);
+					Player player2 = Bukkit.getPlayer(e.getEntity().getUniqueId());
+					Launch.launchPlayer(player2);
 				}
 				else {
-					Launch.launchMob(e.getEntity());
+					Launch.launchPlayer(player);
 				}
+				itemInHand.setAmount(itemInHand.getAmount()-1);
 			}
 		}
 	}

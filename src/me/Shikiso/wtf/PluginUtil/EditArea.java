@@ -58,7 +58,7 @@ public class EditArea {
 		int highestZ = lowestZ == z1 ? z2 : z1;
 		
 		for (int x = lowestX; x <= highestX; x++) {
-			for(int y = 0; y < 128; y++) {
+			for(int y = 0; y < 319; y++) {
 				for (int z = lowestZ; z <= highestZ; z++) {
 					Block block = world.getBlockAt(x, y, z);
 					if (type == 1) {

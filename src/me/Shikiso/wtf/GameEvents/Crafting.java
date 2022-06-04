@@ -1,4 +1,4 @@
-package me.Shikiso.wtf.Blocks;
+package me.Shikiso.wtf.GameEvents;
 
 import java.util.Arrays;
 import java.util.List;
