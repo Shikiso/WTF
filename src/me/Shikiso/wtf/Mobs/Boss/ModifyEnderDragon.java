@@ -84,12 +84,7 @@ public class ModifyEnderDragon implements Listener {
 			int Z = event.getEntity().getLocation().getBlockZ();
 			
 			for (int i=0; i < 20; i++) {
-				if (i/2 == (int)i/2) {
-					event.getEntity().getWorld().spawnEntity(new Location(event.getEntity().getWorld(), X, Y+i, Z), EntityType.BLAZE);
-				}
-				else {
-					event.getEntity().getWorld().spawnEntity(new Location(event.getEntity().getWorld(), X, Y+i, Z), EntityType.GHAST);
-				}
+				event.getEntity().getWorld().spawnEntity(new Location(event.getEntity().getWorld(), X, Y+i, Z), EntityType.GHAST);
 			}
 		}
 	}
@@ -105,7 +100,7 @@ public class ModifyEnderDragon implements Listener {
 		World world = p.getWorld();
 		
 		if (world.getName().equals("world_the_end")) {
-			if ((int)Math.floor(Math.random() *(1000-0+1)+0) == 1) {
+			if ((int)Math.floor(Math.random() *(300-0+1)+0) == 1) {
 				world.dropItem(loc, item);
 			}
 		}
