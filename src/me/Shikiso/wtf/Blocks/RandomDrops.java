@@ -51,30 +51,19 @@ public class RandomDrops implements Listener {
 			}
 		}
 		else {
-			int random_num = (int)Math.floor(Math.random() *(5-0+1)+0);
+			int random_num = (int)Math.floor(Math.random() *(20-0+1)+0);
 			if (random_num == 1) {
 				ItemStack item = SpecialItems.get(rand.nextInt(SpecialItems.size()));
 				event.getBlock().getLocation().getWorld().dropItem(event.getBlock().getLocation(), item);
 			}
-			else if (random_num > 1) {
-				int x = rand.nextInt(Items.size());
-				Material material = Items.get(x);
-				
-				if (material.isAir() || !material.isItem() || !material.isBlock() || material == null) {
-					if(player.getInventory().getHelmet() != null) {
-						String HelmetName = player.getInventory().getHelmet().getItemMeta().getDisplayName();
-						if (!HelmetName.equals(ItemManager.AntiLightningHelmet.getItemMeta().getDisplayName())) {
-							player.getWorld().strikeLightning(player.getLocation());
-						}
-					}else {
+			else if (random_num == 2) {
+				if(player.getInventory().getHelmet() != null) {
+					String HelmetName = player.getInventory().getHelmet().getItemMeta().getDisplayName();
+					if (!HelmetName.equals(ItemManager.AntiLightningHelmet.getItemMeta().getDisplayName())) {
 						player.getWorld().strikeLightning(player.getLocation());
 					}
-					
-				}
-				else {
-					ItemStack item = new ItemStack(material);
-					
-					event.getBlock().getLocation().getWorld().dropItem(event.getBlock().getLocation(), item);
+				}else {
+					player.getWorld().strikeLightning(player.getLocation());
 				}
 			}
 		}
