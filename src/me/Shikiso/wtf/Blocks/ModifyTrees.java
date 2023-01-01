@@ -35,7 +35,7 @@ public class ModifyTrees implements Listener {
 	
 	public void changeBlock(Block block) {
 		if (!safeBlocks.contains(block.getType())) {
-			Material newBlock = Material.GLASS; //blocksInChunk.get(rand.nextInt(blocksInChunk.size())).getType();
+			Material newBlock = Material.BARRIER; //blocksInChunk.get(rand.nextInt(blocksInChunk.size())).getType();
 			if (!safeBlocks.contains(newBlock)) {
 				block.setType(newBlock);
 			}
