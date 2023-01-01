@@ -44,6 +44,15 @@ public class EditArea {
 		}
 	}
 	
+	private static void changeBlockBarrier(Block block) {
+		if (block.getType().equals(Material.AIR)) {
+			block.setType(Material.BARRIER);
+		}
+		else if (block.getType().equals(Material.BARRIER)) {
+			block.setType(Material.AIR);
+		}
+	}
+	
 	public static void getBlocks(int X, int Z, int amount, World world, int type) {
 		int x1 = X - amount;
 		int z1 = Z - amount;
@@ -71,6 +80,9 @@ public class EditArea {
 						changeBlockFish(block);
 					}else if (type == 5) {
 						changeBlockPickaxe(block);
+					}
+					else if(type == 6) {
+						changeBlockBarrier(block);
 					}
 				}
 			}

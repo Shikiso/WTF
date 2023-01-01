@@ -4,10 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -65,6 +63,7 @@ public class RandomDrops implements Listener {
 				}else {
 					player.getWorld().strikeLightning(player.getLocation());
 				}
+
 			}
 		}
 	}

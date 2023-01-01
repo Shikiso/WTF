@@ -11,7 +11,7 @@ public class ModifyOres implements Listener {
 	
 	@EventHandler
 	 public void onBlockBreak(BlockBreakEvent event) {
-		 ItemStack diamonds = new ItemStack(Material.DIAMOND_BLOCK);
+		 ItemStack diamond = new ItemStack(Material.DIAMOND_BLOCK);
 		 ItemStack iron = new ItemStack(Material.IRON_BLOCK);
 		 ItemStack gold = new ItemStack(Material.GOLD_BLOCK);
 		 ItemStack coal = new ItemStack(Material.COAL_BLOCK);
@@ -23,7 +23,7 @@ public class ModifyOres implements Listener {
 		 Block block = event.getBlock();
 		 if (block.getType().equals(Material.DIAMOND_ORE)){
 			 event.setDropItems(false);
-			 block.getWorld().dropItem(block.getLocation(), diamonds);
+			 block.getWorld().dropItem(block.getLocation(), diamond);
 		 }
 		else if (block.getType().equals(Material.IRON_ORE)) {
 			event.setDropItems(false);
