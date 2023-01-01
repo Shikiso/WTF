@@ -30,7 +30,7 @@ public class ItemManager {
 		createAntiLightningHelmet();
 		createAntiExplosionChestplate();
 	}
-	
+
 	public static void createOPSword() {
 		ItemStack item = new ItemStack(Material.NETHERITE_SWORD, 1);
 		ItemMeta meta = item.getItemMeta();
