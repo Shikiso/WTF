@@ -3,7 +3,7 @@ WTF is a Minecraft plugin that changes the state of
 the current game. It makes it either impossible to do the simplist of things, or make it so easy that doing hard tasks such as killing the warden a breeze.
 
 ## Installation
-To install simple download the WTF.jar file and place in the plugins folder inside the server directory.
+To install simply download the WTF.jar file and place in the plugins folder inside the server directory.
 
 ## What does the plugin change
 + TNT has a high chance to spawn when moving on grass
