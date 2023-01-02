@@ -25,7 +25,7 @@ public class ModifyBlazes implements Listener {
 			int amount = 20;
 			int Z = event.getEntity().getLocation().getBlockZ();
 			
-			EditArea.getBlocks(X, Z, amount, event.getEntity().getWorld(), 2);
+			EditArea.changeBlockBlaze(EditArea.getBlocksInArea(X, Z, -63, 319, amount, event.getEntity().getWorld()));
 		}
 	}
 	

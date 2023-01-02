@@ -1,19 +1,16 @@
 package me.Shikiso.wtf.Player;
 
-import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.World;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.Shikiso.wtf.PluginUtil.ItemManager;
@@ -21,8 +18,42 @@ import me.Shikiso.wtf.PluginUtil.Launch;
 
 public class DamageEvent implements Listener {
 	
+	void playerDiedWithBoots(Player player) {
+		player.setHealth(20);
+		player.sendMessage("YOU DIED!");
+		
+		Location loc = player.getLocation();
+		int random_num1 = (int)Math.floor(Math.random() *(100-0+1)+0);
+		int random_num2 = (int)Math.floor(Math.random() *(100-0+1)+0);
+		
+		
+		int X = loc.getBlockX() + random_num1;
+		int Y = loc.getBlockY();
+		int Z = loc.getBlockZ() + random_num2;
+		
+		Location newLoc = new Location(player.getWorld(), X, Y, Z);
+		player.getWorld().createExplosion(newLoc, 40);
+		player.getWorld().playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
+	}
+	
 	@EventHandler
-	public void onPlayerDamage(EntityDamageByEntityEvent e) {
+	public void onPlayerDamage(EntityDamageEvent e) {
+		if (e.getEntity() instanceof Player) {
+			Player player = Bukkit.getPlayer(e.getEntity().getUniqueId());
+			
+			if (player.getInventory().getBoots().getItemMeta() != null) {
+				if (player.getInventory().getBoots().getItemMeta().getDisplayName().equals(ItemManager.ImmortalBoots.getItemMeta().getDisplayName())) {
+					if (e.getDamage() >= player.getHealth()) {
+						e.setCancelled(true);
+						playerDiedWithBoots(player);
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerDamageByEntity(EntityDamageByEntityEvent e) {
 		int timesDied = 1;
 		
 		if (e.getEntity() instanceof Player) {
@@ -30,7 +61,7 @@ public class DamageEvent implements Listener {
 			if (e.getDamager() instanceof Creeper) {
 				e.setCancelled(true);
 			}
-			else if (e.getDamager() instanceof LightningStrike) {
+			else if (e.getDamager() instanceof LightningStrike && player.getInventory().getHelmet().getItemMeta() != null) {
 				if (player.getInventory().getHelmet().getItemMeta().getDisplayName().equals(ItemManager.AntiLightningHelmet.getItemMeta().getDisplayName())) {
 					e.setCancelled(true);
 				}
@@ -39,24 +70,8 @@ public class DamageEvent implements Listener {
 			if (player.getInventory().getBoots().getItemMeta() != null) {
 				if (player.getInventory().getBoots().getItemMeta().getDisplayName().equals(ItemManager.ImmortalBoots.getItemMeta().getDisplayName())) {
 					if (e.getDamage() >= player.getHealth()) {
-						player.setHealth(20);
 						e.setCancelled(true);
-						player.sendMessage("YOU DIED!");
-						
-						Location loc = player.getLocation();
-						int random_num1 = (int)Math.floor(Math.random() *(100-0+1)+0);
-						int random_num2 = (int)Math.floor(Math.random() *(100-0+1)+0);
-						
-						
-						int X = loc.getBlockX() + random_num1;
-						int Y = loc.getBlockY();
-						int Z = loc.getBlockZ() + random_num2;
-						
-						Location newLoc = new Location(player.getWorld(), X, Y, Z);
-						e.getDamager().getWorld().createExplosion(newLoc, 40*timesDied);
-						e.getDamager().getWorld().playSound(loc, Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
-						
-						timesDied++;
+						playerDiedWithBoots(player);
 					}
 				}
 			}

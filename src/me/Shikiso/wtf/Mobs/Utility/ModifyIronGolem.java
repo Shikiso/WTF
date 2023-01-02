@@ -23,8 +23,9 @@ public class ModifyIronGolem implements Listener {
 			int amount = 2;
 			int X = playerLocation.getBlockX();
 			int Z = playerLocation.getBlockZ();
+			int Y = playerLocation.getBlockY();
 			
-			EditArea.getBlocks(X, Z, amount, world, 3);
+			EditArea.changeBlockIronGolem(EditArea.getBlocksInArea(X, Z, Y-3, Y+47, amount, world));
 		}
 	}
 }

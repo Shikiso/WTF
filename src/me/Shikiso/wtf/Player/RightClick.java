@@ -1,7 +1,10 @@
 package me.Shikiso.wtf.Player;
 
+import java.util.List;
+
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,8 +50,11 @@ public class RightClick implements Listener {
 				int X = bellLoc.getBlockX();
 				int Z = bellLoc.getBlockZ();
 				
-				EditArea.getBlocks(X, Z, radius, player.getWorld(), 6);
-				EditArea.getBlocks(X, Z, radius-1, player.getWorld(), 6);
+				List<Block> blocksInArea1 = EditArea.getBlocksInArea(X, Z, -63, 319, radius, player.getWorld());
+				List<Block> blocksInArea2 = EditArea.getBlocksInArea(X, Z, -63, 319, radius-1, player.getWorld());
+				
+				EditArea.changeBlockBarrier(blocksInArea1);
+				EditArea.changeBlockBarrier(blocksInArea2);
 			}
 		}
 	}

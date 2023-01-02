@@ -16,7 +16,7 @@ public class ModifyGhasts implements Listener {
 			int amount = 20;
 			int Z = event.getEntity().getLocation().getBlockZ();
 			
-			EditArea.getBlocks(X, Z, amount, event.getEntity().getWorld(), 1);
+			EditArea.changeBlockGhast(EditArea.getBlocksInArea(X, Z, -63, 319, amount, event.getEntity().getWorld()));
 		}
 	}
 }

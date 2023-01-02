@@ -34,9 +34,10 @@ public class RandomDrops implements Listener {
 				int amount = 4;
 				int X = player.getLocation().getBlockX();
 				int Z = player.getLocation().getBlockZ();
+				int Y = player.getLocation().getBlockY();
 				World world = player.getWorld();
 				
-				EditArea.getBlocks(X, Z, amount, world, 5);
+				EditArea.changeBlockPickaxe(EditArea.getBlocksInArea(X, Z, Y-60, Y+60, amount, world));
 				
 			}
 		}

@@ -14,18 +14,22 @@ public class ModifyFish implements Listener {
 	
 	@EventHandler
 	public void onFishDamage(EntityDamageByEntityEvent e) {
-		if (e.getEntityType().equals(EntityType.TROPICAL_FISH) || e.getEntityType().equals(EntityType.PUFFERFISH)) {
+		if (e.getEntityType().equals(EntityType.TROPICAL_FISH) ||
+				e.getEntityType().equals(EntityType.PUFFERFISH) ||
+				e.getEntityType().equals(EntityType.SALMON)) {
 			
 			Location loc = e.getEntity().getLocation();
 			World world = e.getEntity().getWorld();
 			
-			createOcean(loc, world);
+			createOcean(loc, world);	
 		}
 	}
 	
 	@EventHandler
 	public void fishDeath(EntityDeathEvent e)  {
-		if (e.getEntityType().equals(EntityType.TROPICAL_FISH) || e.getEntityType().equals(EntityType.PUFFERFISH)) {
+		if (e.getEntityType().equals(EntityType.TROPICAL_FISH) ||
+				e.getEntityType().equals(EntityType.PUFFERFISH) ||
+				e.getEntityType().equals(EntityType.SALMON)) {
 			Location loc = e.getEntity().getLocation();
 			World world = e.getEntity().getWorld();
 			
@@ -34,14 +38,15 @@ public class ModifyFish implements Listener {
 	}
 	
 	private void createOcean(Location loc, World world) {
-		int amount = 20;
+		int amount = 15;
 		
 		int X = loc.getBlockX();
 		int Z = loc.getBlockZ();
+		int Y = loc.getBlockY();
 		
-		EditArea.getBlocks(X, Z, amount, world, 4);
+		EditArea.changeBlockIronGolem(EditArea.getBlocksInArea(X, Z, -63, Y+60, amount, world));
 		
-		for (int i=0; i < 5; i++) {
+		for (int i=0; i < 2; i++) {
 			world.spawnEntity(loc, EntityType.ELDER_GUARDIAN);
 		}
 	}
